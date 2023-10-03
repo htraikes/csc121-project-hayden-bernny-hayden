@@ -25,7 +25,6 @@ public class GameWorld{
     
     
     public GameWorld keyPressed(KeyEvent key) {
-
     	return new GameWorld( p.keyPress(key), bullets.addBullets(p, key));
   }
     
@@ -34,16 +33,9 @@ public class GameWorld{
         return this;
     }
     
-    
 }
 
-/**
 
-import processing.core.*;
-import java.util.*;
-
-
-public class GameWorld extends PApplet{
     
  
     
@@ -51,6 +43,4 @@ public class GameWorld extends PApplet{
     
 
     
-}
 
-*/

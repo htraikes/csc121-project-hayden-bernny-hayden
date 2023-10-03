@@ -31,7 +31,6 @@ public class Bullets {
 	  		    bullet.update();
 	  		  }
     	
-    	  
     	  return this;
       }
     
