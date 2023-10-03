@@ -1,7 +1,9 @@
 import processing.core.*;
 import processing.event.KeyEvent;
 
-
+/**
+ * Provides the scaffolding to launch a Processing application
+ */
 public class GameApp extends PApplet{
 	GameWorld gw;
 	
