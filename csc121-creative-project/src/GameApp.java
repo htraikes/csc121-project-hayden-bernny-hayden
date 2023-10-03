@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 import processing.core.*;
 import processing.event.KeyEvent;
 
@@ -12,7 +10,7 @@ public class GameApp extends PApplet{
     }
     
     public void setup() {
-    	gw = new GameWorld(new Player(200) , new ArrayList<>());
+    	gw = new GameWorld(new Player(200) , new Bullets());
     }
     
     public void draw() {
