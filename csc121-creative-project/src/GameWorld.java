@@ -1,59 +1,90 @@
 import processing.core.*;
+import processing.event.KeyEvent;
+
+import java.util.*;
+
+public class GameWorld{
+    Player p;
+    ArrayList<Bullet> bullets; 
+    
+    public GameWorld(Player p , ArrayList<Bullet> bullets) {
+        this.p = p;
+        this.bullets = bullets; 
+    }
+    
+    public PApplet draw(PApplet c) {
+    	c.background(255);
+    	
+    	p.draw(c);
+    	
+	  for (int i = bullets.size() - 1; i >= 0; i--) {
+		    Bullet bullet = bullets.get(i);
+		    
+		    bullet.draw(c);
+		    if (bullet.isOffscreen()) {
+		      bullets.remove(i);
+		    }
+		  }
+    	
+    	
+        return c;
+    }
+    
+    public ArrayList<Bullet> updateBullets(ArrayList<Bullet> curBullets){
+  	  for (int i = curBullets.size() - 1; i >= 0; i--) {
+		    Bullet bullet = curBullets.get(i);
+		    bullet.update();
+		  }
+  	  
+  	  return curBullets;
+    }
+    
+    
+    
+    public GameWorld update() {
+    	return new GameWorld(p.updatePlayer(), this.updateBullets(bullets));
+    }
+    
+    
+    public ArrayList<Bullet> addBullets(ArrayList<Bullet> curBullets, KeyEvent key){
+    	if (key.getKeyCode() == 32) {
+    		
+    		Bullet newBullet = new Bullet(p.playerX + p.playerWidth / 2, p.playerY);
+    		curBullets.add(newBullet);
+    		
+    		return curBullets;
+  		  }
+    	
+    	return curBullets;
+    }
+    
+    public GameWorld keyPressed(KeyEvent key) {
+
+    	return new GameWorld( p.keyPress(key), this.addBullets(bullets, key));
+  }
+    
+    public GameWorld keyReleased(KeyEvent key) {
+        p.keyReleased(key);
+        return this;
+    }
+    
+    
+}
+
+/**
+
+import processing.core.*;
 import java.util.*;
 
 
 public class GameWorld extends PApplet{
-    Player p;
-    ArrayList<Bullet> bullets = new ArrayList<Bullet>();
     
-    public void settings() {
-        this.size(400, 400);
-        
-    }
+ 
+    
 
-    public void setup() {
-        p = new Player(200);
-    }
     
-    public void draw() {
-        p.draw(this);
-        
-		  for (int i = bullets.size() - 1; i >= 0; i--) {
-			    Bullet bullet = bullets.get(i);
-			    bullet.update();
-			    bullet.draw(this);
-			    if (bullet.isOffscreen()) {
-			      bullets.remove(i);
-			    }
-			  }
-    }
-    
-    public void keyPressed() {
-    	  if (key == CODED) {
-    	    
-    		 if (keyCode == RIGHT) {
-    	    	p.movingRight = true;
-    	    	
-    	      
-    	    } else if (keyCode == LEFT) {
-    	    	p.movingLeft = true;
-    	    	
-    	    } 
-    	  	} else {
-    	  		p.movingLeft = false;
-    	  		p.movingRight = false;
-    	  	}
-    	  p = p.move();
-    	  
-    	  if (keyPressed && key == ' ') {
-    		    bullets.add(new Bullet(p.playerX + p.playerWidth / 2, p.playerY));
-    		  }
-    		  
 
-    }
-    
-    public static void main(String[] args) {
-        PApplet.runSketch(new String[] { "GameWorld" }, new GameWorld());
-    }
     
 }
+
+*/
