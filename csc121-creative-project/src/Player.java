@@ -18,7 +18,6 @@ public class Player {
 		   this.playerX = playerX;
 		   this.playerY = 350;
 		   this.playerXSpeed = 7;
-		   this.playerYSpeed = 7;
 		   this.playerHeight = 25;
 		   this.playerWidth = 25;
 	  }
@@ -74,14 +73,14 @@ public class Player {
 	  public Player updatePlayer() {
 	    if (movingRight == true) {
 	    	this.playerX += this.playerXSpeed;
-	    	return this;
+	    	
 	    }
 	     if (movingLeft == true) {
 	    	 this.playerX -= this.playerXSpeed;
-	    	 return this;
-	    }else {
-	    	return this;
+	    	 
 	    }
+	    	return this;
+	    
 	  } 
 	  
 

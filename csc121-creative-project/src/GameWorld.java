@@ -10,7 +10,7 @@ public class GameWorld{
     Bullets bullets; 
     
     /**
-     * Creates a game world given a Player object and Bullets opbject
+     * Creates a game world given a Player object and Bullets object
      */
     public GameWorld(Player p , Bullets bullets) {
         this.p = p;
@@ -40,7 +40,9 @@ public class GameWorld{
      * Produces an updated world which changes values to allow the player to move and add bullets to the Bullets class
      */
     public GameWorld keyPressed(KeyEvent key) {
-    	return new GameWorld( p.keyPress(key), bullets.addBullets(p, key));
+    	p = p.keyPress(key);
+    	bullets = bullets.addBullets(p, key);
+    	return this;
   }
     
     /**
