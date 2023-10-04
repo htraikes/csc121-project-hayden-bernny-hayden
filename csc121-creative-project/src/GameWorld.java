@@ -8,13 +8,15 @@ import processing.event.KeyEvent;
 public class GameWorld{
     Player p;
     Bullets bullets; 
+    Enemies enemies;
     
     /**
      * Creates a game world given a Player object and Bullets object
      */
     public GameWorld(Player p , Bullets bullets) {
         this.p = p;
-        this.bullets = bullets; 
+        this.bullets = bullets;
+        enemies = new Enemies();
     }
     
     /**
@@ -24,7 +26,8 @@ public class GameWorld{
     	c.background(255);
     	p.draw(c);
     	bullets.draw(c);
-
+    	enemies.draw(c);
+    	
         return c;
     }
     
@@ -33,7 +36,10 @@ public class GameWorld{
      * left or right and the bullets flying up the screen
      */
     public GameWorld update() {
-    	return new GameWorld(p.updatePlayer(), bullets.updateBullets());
+    	enemies.updateEnemies();
+    	p.updatePlayer();
+    	bullets.updateBullets();
+    	return this;
     }
     
     /**

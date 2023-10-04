@@ -38,7 +38,7 @@ public class Player {
 	   */
 	  public Player keyPress(KeyEvent key) {
 		  
-		  		 if (key.getKeyCode() == 39) {
+		  		 if (key.getKeyCode() == PApplet.RIGHT) {
 
 		  			this.movingLeft = false;
 		  			this.movingRight = true;
@@ -76,11 +76,9 @@ public class Player {
 	    	
 	    }
 	     if (movingLeft == true) {
-	    	 this.playerX -= this.playerXSpeed;
-	    	 
+	    	 this.playerX -= this.playerXSpeed; 
 	    }
 	    	return this;
-	    
 	  } 
 	  
 
