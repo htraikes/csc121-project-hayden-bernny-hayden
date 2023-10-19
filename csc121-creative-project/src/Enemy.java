@@ -1,19 +1,19 @@
 import processing.core.PApplet;
 
 public class Enemy {
-	  float enemyX;
-	  float enemyY;
-	  float enemyXSpeed;
-	  float enemyYSpeed;
-	  int enemyWidth;
-	  int enemyHeight;
+	  private float enemyX;
+	  private float enemyY;
+	  private float enemyXSpeed;
+	  private float enemyYSpeed;
+	  private int enemyWidth;
+	  private int enemyHeight;
 	  
-	  float eTop;
-	  float eBottom;
-	  float eLeft;
-	  float eRight;
+	  private float eTop;
+	  private float eBottom;
+	  private float eLeft;
+	  private float eRight;
 	  
-	  boolean dead;
+	  private boolean dead;
 	  
 	  
 	  Enemy(float enemyX, float enemyY){
@@ -50,8 +50,8 @@ public class Enemy {
 	   * Determines if a bullet comes in contact with an enemy
 	   */
 	  public boolean isHit(Bullet b) {
-		    if (b.bRight >= eLeft && b.bLeft <= eRight) {
-		      if (b.bTop <= eBottom && b.bBottom >= eTop) {
+		    if (b.getbRight() >= eLeft && b.getbLeft() <= eRight) {
+		      if (b.getbTop() <= eBottom && b.getbBottom() >= eTop) {
 		        this.dead = true;
 		        return true;
 		      }

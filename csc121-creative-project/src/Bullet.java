@@ -4,14 +4,14 @@ import processing.core.PApplet;
  * Represent a single bullet with x & y position and constant speed
  */
 public class Bullet {
-	  float x;
-	  float y;
-	  float speed = 5; // Bullet speed
+	  private float x;
+	  private float y;
+	  private float speed = 5; // Bullet speed
 	  
-	  float bTop;
-	  float bBottom;
-	  float bRight;
-	  float bLeft;
+	  private float bTop;
+	  private float bBottom;
+	  private float bRight;
+	  private float bLeft;
 	  
 	  
 	  
@@ -19,10 +19,10 @@ public class Bullet {
 	    this.x = x;
 	    this.y = y;
 	    
-	    bTop = x;
-	    bBottom = y + 10;
-	    bRight = x + 10;
-	    bLeft = x;
+	    setbTop(x);
+	    setbBottom(y + 10);
+	    setbRight(x + 10);
+	    setbLeft(x);
 	  }
 	  
 
@@ -56,4 +56,44 @@ public class Bullet {
 			  return this;
 		  }
 	  }
+
+
+	public float getbLeft() {
+		return bLeft;
+	}
+
+
+	public void setbLeft(float bLeft) {
+		this.bLeft = bLeft;
+	}
+
+
+	public float getbRight() {
+		return bRight;
+	}
+
+
+	public void setbRight(float bRight) {
+		this.bRight = bRight;
+	}
+
+
+	public float getbTop() {
+		return bTop;
+	}
+
+
+	public void setbTop(float bTop) {
+		this.bTop = bTop;
+	}
+
+
+	public float getbBottom() {
+		return bBottom;
+	}
+
+
+	public void setbBottom(float bBottom) {
+		this.bBottom = bBottom;
+	}
 	}

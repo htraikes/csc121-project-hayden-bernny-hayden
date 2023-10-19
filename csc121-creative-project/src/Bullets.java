@@ -6,7 +6,7 @@ import processing.event.KeyEvent;
  * Represents a list of bullets that will appear on the 'canvas'
  */
 public class Bullets {
-	ArrayList<Bullet> bullets;
+	private ArrayList<Bullet> bullets;
 	
 	public Bullets() {
 		bullets = new ArrayList<>();
@@ -45,7 +45,7 @@ public class Bullets {
     public Bullets addBullets(Player p, KeyEvent key){
     	if (key.getKeyCode() == 32) {
     		
-    		Bullet newBullet = new Bullet(p.playerX + p.playerWidth / 2, p.playerY);
+    		Bullet newBullet = new Bullet(p.getPlayerX() + p.getPlayerWidth() / 2, p.getPlayerY());
     		bullets.add(newBullet);
     		
     		return this;

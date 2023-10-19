@@ -3,8 +3,8 @@ import java.util.ArrayList;
 import processing.core.PApplet;
 
 public class Enemies {
-	ArrayList<Enemy> enemies;
-	int counter;
+	private ArrayList<Enemy> enemies;
+	private int counter;
 	
 	public Enemies() {
 		enemies = new ArrayList<>();

@@ -30,26 +30,26 @@ class GameWorldTest {
 		gOne.keyPressed(rightEvent);
 		gOne.update();
 		
-		assertEquals(gOne.p.movingRight, true);
+		assertEquals(gOne.p.isMovingRight(), true);
 		
 		gOne.keyReleased(rightEvent);
 		
-		assertEquals(gOne.p.movingRight, false);
-		assertEquals(gOne.p.playerX, 207);
+		assertEquals(gOne.p.isMovingRight(), false);
+		assertEquals(gOne.p.getPlayerX(), 207);
 		
 		//LEFTMOVE
 		KeyEvent leftEvent = new KeyEvent(null, 0, 0, 0, (char) (37), 37) ;
 		gOne.keyPressed(leftEvent);
 		gOne.update();
 		
-		assertEquals(gOne.p.movingLeft, true);
+		assertEquals(gOne.p.isMovingLeft(), true);
 		
 		gOne.keyReleased(leftEvent);
 		
 		assertFalse(pOne.isHit(bTwo));
 		
-		assertEquals(gOne.p.movingLeft, false);
-		assertEquals(gOne.p.playerX, 200);
+		assertEquals(gOne.p.isMovingLeft(), false);
+		assertEquals(gOne.p.getPlayerX(), 200);
 		
 		assertTrue(pOne.isHit(bThree));
 		
