@@ -8,6 +8,13 @@ public class Enemy {
 	  int enemyWidth;
 	  int enemyHeight;
 	  
+	  float eTop;
+	  float eBottom;
+	  float eLeft;
+	  float eRight;
+	  
+	  boolean dead;
+	  
 	  
 	  Enemy(float enemyX, float enemyY){
 		   this.enemyX = enemyX;
@@ -16,6 +23,15 @@ public class Enemy {
 		   this.enemyYSpeed = 1;
 		   this.enemyHeight = 20;
 		   this.enemyWidth = 20;
+		   
+		   this.eTop = enemyY;
+		   this.eBottom = enemyY + enemyHeight;
+		   this.eLeft = enemyX;
+		   this.eRight = enemyX + enemyWidth;
+		   
+		   dead = false;
+		   
+		   
 		   
 	  }
 	     
@@ -28,6 +44,17 @@ public class Enemy {
 	  public Enemy updateEnemy() {
 		  enemyY = enemyY + enemyYSpeed;
 		  return this;
+	  }
+	  
+	  /*
+	   * Determines if a bullet comes in contact with an enemy
+	   */
+	  void hitbox(Bullet b) {
+	    if (b.bRight >= eLeft && b.bLeft <= eRight) {
+	      if (b.bTop <= eBottom && b.bBottom >= eTop) {
+	        this.dead = true;
+	      }
+	    }
 	  }
 
 }

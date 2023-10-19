@@ -14,15 +14,31 @@ public class Player {
 	  int playerWidth;
 	  int playerHeight;
 	  
+	  float pTop;
+	  float pBottom;
+	  float pRight;
+	  float pLeft;
+	  
+	  boolean dead;
+	  
+	  
+	  
 	  Player(float playerX){
 		   this.playerX = playerX;
 		   this.playerY = 350;
 		   this.playerXSpeed = 7;
 		   this.playerHeight = 25;
 		   this.playerWidth = 25;
+		   
+		   pTop = playerX;
+		   pBottom = playerX + playerWidth;
+		   pRight = playerX + playerHeight;
+		   pLeft = playerY;
+		   
+		   this.dead = false;
+		  
 	  }
-	  
-	
+	  	
 	  
 	  /**
 	   * Draw rectangle at players current position
@@ -80,6 +96,17 @@ public class Player {
 	    }
 	    	return this;
 	  } 
+	  
+	  /*
+	   * Determines if a bullet is in contact with an enemy
+	   */
+	  void hitbox(Bullet b) {
+	    if (b.bRight >= pLeft && b.bLeft <= pRight) {
+	      if (b.bTop <= pBottom && b.bBottom >= pTop) {
+	        this.dead = true;
+	      }
+	    }
+	  }
 	  
 
 	  

@@ -8,9 +8,21 @@ public class Bullet {
 	  float y;
 	  float speed = 5; // Bullet speed
 	  
+	  float bTop;
+	  float bBottom;
+	  float bRight;
+	  float bLeft;
+	  
+	  
+	  
 	  Bullet(float x, float y) {
 	    this.x = x;
 	    this.y = y;
+	    
+	    bTop = x;
+	    bBottom = y + 10;
+	    bRight = x + 10;
+	    bLeft = x;
 	  }
 	  
 
@@ -30,6 +42,8 @@ public class Bullet {
 	  boolean isOffscreen() {
 	    return y < 0;
 	  }
+	  
+
 	  
 	  /*
 	   * returns an updated bullet to a new y position
