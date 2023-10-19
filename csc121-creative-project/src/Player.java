@@ -98,14 +98,16 @@ public class Player {
 	  } 
 	  
 	  /*
-	   * Determines if a bullet is in contact with an enemy
+	   * Determines if a bullet is in contact with a player
 	   */
-	  void hitbox(Bullet b) {
+	  public boolean isHit(Bullet b) {
 	    if (b.bRight >= pLeft && b.bLeft <= pRight) {
 	      if (b.bTop <= pBottom && b.bBottom >= pTop) {
 	        this.dead = true;
+	        return true;
 	      }
 	    }
+	    return false;
 	  }
 	  
 

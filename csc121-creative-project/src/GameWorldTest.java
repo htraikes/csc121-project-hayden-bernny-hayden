@@ -9,6 +9,12 @@ class GameWorldTest {
 	
 	//creates a Bullets object for the test class
 	Bullets bOne = new Bullets();
+	
+	//creates a singular bullet for test class that would NOT hit a player
+	Bullet bTwo = new Bullet(0, 0);
+	
+	//creates a singular bullet for test class that WOULD hit a player
+	Bullet bThree = new Bullet(200, 350);
 
 	GameWorld gOne = new GameWorld(pOne, bOne);
 	
@@ -40,8 +46,12 @@ class GameWorldTest {
 		
 		gOne.keyReleased(leftEvent);
 		
+		assertFalse(pOne.isHit(bTwo));
+		
 		assertEquals(gOne.p.movingLeft, false);
 		assertEquals(gOne.p.playerX, 200);
+		
+		assertTrue(pOne.isHit(bThree));
 		
 		//checks to see if keyPressed is updating GameWorlds Bullets correctly
 		KeyEvent spaceEvent = new KeyEvent(null, 0, 0, 0, (char) (32), 32) ;

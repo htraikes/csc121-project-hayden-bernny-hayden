@@ -49,12 +49,14 @@ public class Enemy {
 	  /*
 	   * Determines if a bullet comes in contact with an enemy
 	   */
-	  void hitbox(Bullet b) {
-	    if (b.bRight >= eLeft && b.bLeft <= eRight) {
-	      if (b.bTop <= eBottom && b.bBottom >= eTop) {
-	        this.dead = true;
-	      }
-	    }
-	  }
+	  public boolean isHit(Bullet b) {
+		    if (b.bRight >= eLeft && b.bLeft <= eRight) {
+		      if (b.bTop <= eBottom && b.bBottom >= eTop) {
+		        this.dead = true;
+		        return true;
+		      }
+		    }
+		    return false;
+		  }
 
 }
