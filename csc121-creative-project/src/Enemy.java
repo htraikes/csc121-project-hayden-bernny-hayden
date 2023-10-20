@@ -58,5 +58,12 @@ public class Enemy {
 		    }
 		    return false;
 		  }
+	  
+	  /*
+	   * determines if *this* enemy is dead
+	   */
+	  public boolean isDead() {
+		  return this.dead;
+	  }
 
 }

@@ -58,41 +58,65 @@ public class Bullet {
 	  }
 
 
+	/*
+	 * returns the bullet left hitbox boundary 
+	 */
 	public float getbLeft() {
 		return bLeft;
 	}
 
 
+	/*
+	 * sets the bullet left hitbox boundary 
+	 */
 	public void setbLeft(float bLeft) {
 		this.bLeft = bLeft;
 	}
 
 
+	/*
+	 * returns the bullet right hitbox boundary 
+	 */
 	public float getbRight() {
 		return bRight;
 	}
 
 
+	/*
+	 * sets the bullet right hitbox boundary 
+	 */
 	public void setbRight(float bRight) {
 		this.bRight = bRight;
 	}
 
 
+	/*
+	 * returns the bullet top hitbox boundary 
+	 */
 	public float getbTop() {
 		return bTop;
 	}
 
 
+	/*
+	 * sets the bullet top hitbox boundary 
+	 */
 	public void setbTop(float bTop) {
 		this.bTop = bTop;
 	}
 
 
+	/*
+	 * returns the bullet bottom hitbox boundary 
+	 */
 	public float getbBottom() {
 		return bBottom;
 	}
 
 
+	/*
+	 * sets the bullet bottom hitbox boundary 
+	 */
 	public void setbBottom(float bBottom) {
 		this.bBottom = bBottom;
 	}

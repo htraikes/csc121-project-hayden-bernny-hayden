@@ -110,54 +110,91 @@ public class Player {
 	    return false;
 	  }
 
-
+	  
+	  /*
+	   * returns the player x position
+	   */
 	public float getPlayerX() {
 		return playerX;
 	}
 
 
+	  /*
+	   * sets the player x position
+	   */
 	public void setPlayerX(float playerX) {
 		this.playerX = playerX;
 	}
 
 
+	  /*
+	   * returns the player width
+	   */
 	public int getPlayerWidth() {
 		return playerWidth;
 	}
 
-
+	  /*
+	   * sets the player width position
+	   */
 	public void setPlayerWidth(int playerWidth) {
 		this.playerWidth = playerWidth;
 	}
 
 
+	  /*
+	   * returns the player Y position
+	   */
 	public float getPlayerY() {
 		return playerY;
 	}
 
 
+	  /*
+	   * sets the player Y position
+	   */
 	public void setPlayerY(float playerY) {
 		this.playerY = playerY;
 	}
 
 
+	  /*
+	   * determines if the player is moving right
+	   */
 	public boolean isMovingRight() {
 		return movingRight;
 	}
 
 
+	  /*
+	   * sets the player moving right
+	   */
 	public void setMovingRight(boolean movingRight) {
 		this.movingRight = movingRight;
 	}
 
 
+	  /*
+	   * determines if the player is moving left
+	   */
 	public boolean isMovingLeft() {
 		return movingLeft;
 	}
 
 
+	  /*
+	   * sets the player moving left
+	   */
 	public void setMovingLeft(boolean movingLeft) {
 		this.movingLeft = movingLeft;
+	}
+	
+	
+	  /*
+	   * determines if *this* player 
+	   */
+	public boolean isDead() {
+		return this.dead;
 	}
 	  
 
