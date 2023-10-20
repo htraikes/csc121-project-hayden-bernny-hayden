@@ -7,61 +7,55 @@ import processing.event.KeyEvent;
  * Represents a list of bullets that will appear on the 'canvas'
  */
 public class Bullets {
-	private ArrayList<Bullet> bullets;
-	PImage img;
-	
-	public Bullets(PImage img) {
-		bullets = new ArrayList<>();
-		this.img = img;
-	}
+    private ArrayList<Bullet> bullets;
+    private static PImage img;
 
-	/*
-	 * draws the ArrayList of Bullets on the screen
-	 */
-  public PApplet draw(PApplet c) {
-	  
-		  for (int i = bullets.size() - 1; i >= 0; i--) {
-			    Bullet bullet = bullets.get(i);
-			    bullet.draw(c);
-			    if (bullet.isOffscreen()) {
-			      bullets.remove(i);
-			    }
-			  }
-	  return c;
-	  }
-	  
-  /*
-   * updates all the bullets in the ArrayList to a new y position
-   */
-    public Bullets updateBullets(){
-    	
-	    	  for (int i = bullets.size() - 1; i >= 0; i--) {
-	  		    Bullet curBullet = bullets.get(i);
-	  		    
-	  		    Bullet newBullet = curBullet.update();
-	  		    curBullet = newBullet;
-	  		  }
-    	  return this;
-      }
-    
-    /*
-     * if ' ' is pressed it will add a new bullet to the Array list at the players x position
-     */
-    public Bullets addBullets(Player p, KeyEvent key){
-    	if (key.getKeyCode() == 32) {
-    		
-    		Bullet newBullet = new Bullet(p.getPlayerX() + p.getPlayerWidth() / 2, p.getPlayerY(), img);
-    		bullets.add(newBullet);
-    		
-    		return this;
-  		  }
-    	
-    	return this;
+    private static final int SPACE_KEY_CODE = 32; // Key code for the spacebar
+
+    public Bullets(PImage img) {
+        bullets = new ArrayList<>();
+        Bullets.img = img;
     }
-    
-	public ArrayList<Bullet> giveBullets() {
-		return this.bullets;
-	}
+
+    /*
+     * Draws the ArrayList of Bullets on the screen
+     */
+    public void draw(PApplet c) {
+        for (int i = bullets.size() - 1; i >= 0; i--) {
+            Bullet bullet = bullets.get(i);
+            bullet.draw(c);
+            if (bullet.isOffscreen()) {
+                bullets.remove(i);
+            }
+        }
+    }
+
+    /*
+     * Updates all the bullets in the ArrayList to a new y position
+     */
+    public void updateBullets() {
+        for (int i = bullets.size() - 1; i >= 0; i--) {
+            Bullet curBullet = bullets.get(i);
+            curBullet.update();
+        }
+    }
+
+    /*
+     * If the spacebar is pressed, it will add a new bullet to the ArrayList at the player's x position
+     */
+    public void addBullets(Player p, KeyEvent key) {
+        if (key.getKeyCode() == SPACE_KEY_CODE) {
+            Bullet newBullet = new Bullet(p.getPlayerX() + p.getPlayerWidth() / 2, p.getPlayerY(), img);
+            bullets.add(newBullet);
+        }
+    }
+
+    /*
+     * Returns the ArrayList of bullets
+     */
+    public ArrayList<Bullet> giveBullets() {
+        return new ArrayList<>(this.bullets);
+    }
 }
 
 

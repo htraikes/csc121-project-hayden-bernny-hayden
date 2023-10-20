@@ -5,202 +5,133 @@ import processing.event.KeyEvent;
 /**
  * Represents a player that can move
  */
-public class Player extends PApplet{
-	  private boolean movingRight;
-	  private boolean movingLeft;
-	  private float playerX;
-	  private float playerY;
-	  private float playerXSpeed;
-	  private int playerWidth;
-	  private int playerHeight;
-	  private PImage img;  // Declare PImage variable
-	  private float pTop;
-	  private float pBottom;
-	  private float pRight;
-	  private float pLeft;
-	  
-	  private boolean dead;
-	  
-	  
-	  
-	  Player(float playerX, PImage img){
-		   this.playerX = playerX;
-		   this.playerY = 350;
-		   this.playerXSpeed = 3;
-		   this.playerHeight = 25;
-		   this.playerWidth = 25;
-		   this.img = img;
-		   pLeft = (float) (playerX - (playerWidth));
-		   pRight = (float) (playerX + (playerWidth));
-		   pTop = (float) (playerY - (playerHeight));
-		   pBottom = (float) (playerY + (playerHeight));
-		   
-		   this.dead = false;
-		  
-	  }
-	  
-	  
-	  /**
-	   * Draw rectangle at players current position
-	   */
-	  public PApplet draw(PApplet c) {
-		this.setup();
-	    c.fill(0, 0, 255);
-	    c.imageMode(CORNER);
-	    c.image(img,playerX , playerY , playerWidth, playerHeight);
-	    return c;
-	  }
-	  
-	  /**
-	   * Changes the boolean values of moving(Right or Left) depending on the key event to allow the player to mvoe
-	   */
-	  public Player keyPress(KeyEvent key) {
-		  
-		  		 if (key.getKeyCode() == PApplet.RIGHT) {
+public class Player extends PApplet {
+    private boolean movingRight;
+    private boolean movingLeft;
+    private float playerX;
+    private float playerY;
+    private final PImage img;  // Declare PImage variable
+    private float pTop;
+    private float pBottom;
+    private float pRight;
+    private float pLeft;
+    private boolean dead;
+    
+    private final float playerXSpeed = 3;
+    private final int playerWidth = 25;
+    private final int playerHeight = 25;
 
-		  			this.setMovingLeft(false);
-		  			this.setMovingRight(true);
-		  			
-		  	    } else if (key.getKeyCode() == 37) {
-		  			this.setMovingLeft(true);
-		  			this.setMovingRight(false);
-		  			
-		  	    } else {
-		  			this.setMovingLeft(false);
-		  			this.setMovingRight(false);
-		  	    }
-		  		return this;
-		  	  
-	  }
-	  
-	  /*
-	   * Resets the moving(Right or Left) value once the appropriate Key is released
-	   */
-	  public void keyReleased(KeyEvent key) {
-		    if (key.getKeyCode() == 39) {
-		        setMovingRight(false);
-		    } else if (key.getKeyCode() == 37) {
-		        setMovingLeft(false);
-		    }
-		}
-	  
+    // Constructor for the player class
+    Player(float playerX, PImage img) {
+        this.playerX = playerX;
+        this.playerY = 350;
+        this.dead = false;
+        this.img = img;
+    }
 
-	  /*
-	   * Changes the PlayerX position according to if the player is moving(Right or Left)
-	   */
-	  public Player updatePlayer() {
-	    if (isMovingRight() == true) {
-	    	this.setPlayerX(this.getPlayerX() + this.playerXSpeed);
-	    	
-	    }
-	     if (isMovingLeft() == true) {
-	    	 this.setPlayerX(this.getPlayerX() - this.playerXSpeed); 
-	    }
-	    	return this;
-	  } 
-	  
-	  /*
-	   * Determines if a bullet is in contact with a player
-	   */
-	  public void isHit(Bullet b) {
-	    if (b.getbRight() < pRight && b.getbLeft() > pLeft && b.getbTop() > pTop && b.getbBottom() <= pBottom) {
-	        this.dead = true;
-	    }
-	    
-	  }
+    /**
+     * Draw the player at the current position
+     */
+    public PApplet draw(PApplet c) {
+        this.setup();
+        c.fill(0, 0, 255);
+        c.imageMode(CORNER);
+        c.image(img, playerX, playerY, playerWidth, playerHeight);
+        return c;
+    }
 
-	  
-	  /*
-	   * returns the player x position
-	   */
-	public float getPlayerX() {
-		return playerX;
-	}
+    /**
+     * Update the moving direction of the player based on the key event
+     */
+    public Player keyPress(KeyEvent key) {
+        if (key.getKeyCode() == PApplet.RIGHT) {
+            this.setMovingLeft(false);
+            this.setMovingRight(true);
+        } else if (key.getKeyCode() == 37) {
+            this.setMovingLeft(true);
+            this.setMovingRight(false);
+        } else {
+            this.setMovingLeft(false);
+            this.setMovingRight(false);
+        }
+        return this;
+    }
 
+    /**
+     * Reset the moving direction of the player once the appropriate key is released
+     */
+    public void keyReleased(KeyEvent key) {
+        if (key.getKeyCode() == 39) {
+            setMovingRight(false);
+        } else if (key.getKeyCode() == 37) {
+            setMovingLeft(false);
+        }
+    }
 
-	  /*
-	   * sets the player x position
-	   */
-	public void setPlayerX(float playerX) {
-		this.playerX = playerX;
-	}
+    /**
+     * Update the player position based on the moving direction
+     */
+    public Player updatePlayer() {
+        if (isMovingRight()) {
+            this.setPlayerX(this.getPlayerX() + this.playerXSpeed);
+        }
+        if (isMovingLeft()) {
+            this.setPlayerX(this.getPlayerX() - this.playerXSpeed);
+        }
+        return this;
+    }
 
+    /**
+     * Check if a bullet is in contact with the player
+     */
+    public void isHit(Bullet b) {
+        if (b.getbRight() < pRight && b.getbLeft() > pLeft && b.getbTop() > pTop && b.getbBottom() <= pBottom) {
+            this.dead = true;
+        }
+    }
 
-	  /*
-	   * returns the player width
-	   */
-	public int getPlayerWidth() {
-		return playerWidth;
-	}
+    // Getters and setters for various fields
+    public float getPlayerX() {
+        return playerX;
+    }
 
-	  /*
-	   * sets the player width position
-	   */
-	public void setPlayerWidth(int playerWidth) {
-		this.playerWidth = playerWidth;
-	}
+    public void setPlayerX(float playerX) {
+        this.playerX = playerX;
+    }
 
+    public int getPlayerWidth() {
+        return playerWidth;
+    }
 
-	  /*
-	   * returns the player Y position
-	   */
-	public float getPlayerY() {
-		return playerY;
-	}
+    public void setPlayerWidth(int playerWidth) {
+        // Not needed since playerWidth is final
+    }
 
+    public float getPlayerY() {
+        return playerY;
+    }
 
-	  /*
-	   * sets the player Y position
-	   */
-	public void setPlayerY(float playerY) {
-		this.playerY = playerY;
-	}
+    public void setPlayerY(float playerY) {
+        this.playerY = playerY;
+    }
 
+    public boolean isMovingRight() {
+        return movingRight;
+    }
 
-	  /*
-	   * determines if the player is moving right
-	   */
-	public boolean isMovingRight() {
-		return movingRight;
-	}
+    public void setMovingRight(boolean movingRight) {
+        this.movingRight = movingRight;
+    }
 
+    public boolean isMovingLeft() {
+        return movingLeft;
+    }
 
-	  /*
-	   * sets the player moving right
-	   */
-	public void setMovingRight(boolean movingRight) {
-		this.movingRight = movingRight;
-	}
+    public void setMovingLeft(boolean movingLeft) {
+        this.movingLeft = movingLeft;
+    }
 
-
-	  /*
-	   * determines if the player is moving left
-	   */
-	public boolean isMovingLeft() {
-		return movingLeft;
-	}
-
-
-	  /*
-	   * sets the player moving left
-	   */
-	public void setMovingLeft(boolean movingLeft) {
-		this.movingLeft = movingLeft;
-	}
-	
-	
-	  /*
-	   * determines if *this* player 
-	   */
-	public boolean isDead() {
-		return this.dead;
-	}
-	  
-
-	  
-
-	  
-
+    public boolean isDead() {
+        return this.dead;
+    }
 }
-
-
