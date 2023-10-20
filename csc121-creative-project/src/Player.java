@@ -10,7 +10,6 @@ public class Player {
 	  private float playerX;
 	  private float playerY;
 	  private float playerXSpeed;
-	  private float playerYSpeed;
 	  private int playerWidth;
 	  private int playerHeight;
 	  
@@ -30,10 +29,10 @@ public class Player {
 		   this.playerHeight = 25;
 		   this.setPlayerWidth(25);
 		   
-		   pTop = playerX;
-		   pBottom = playerX + getPlayerWidth();
-		   pRight = playerX + playerHeight;
-		   pLeft = getPlayerY();
+		   pLeft = (float) (playerX - (playerWidth));
+		   pRight = (float) (playerX + (playerWidth));
+		   pTop = (float) (playerY - (playerHeight));
+		   pBottom = (float) (playerY + (playerHeight));
 		   
 		   this.dead = false;
 		  
@@ -100,14 +99,11 @@ public class Player {
 	  /*
 	   * Determines if a bullet is in contact with a player
 	   */
-	  public boolean isHit(Bullet b) {
-	    if (b.getbRight() >= pLeft && b.getbLeft() <= pRight) {
-	      if (b.getbTop() <= pBottom && b.getbBottom() >= pTop) {
+	  public void isHit(Bullet b) {
+	    if (b.getbRight() < pRight && b.getbLeft() > pLeft && b.getbTop() > pTop && b.getbBottom() <= pBottom) {
 	        this.dead = true;
-	        return true;
-	      }
 	    }
-	    return false;
+	    
 	  }
 
 	  

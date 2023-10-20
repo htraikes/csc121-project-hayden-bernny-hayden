@@ -16,6 +16,14 @@ public class Enemies {
 		}
 	}
 	
+	public void removeDead() {
+		for (int i = enemies.size() - 1; i >= 0; i--){
+			if (enemies.get(i).isDead()) {
+				enemies.remove(i);
+			}
+		}
+	}
+	
 	  public PApplet draw(PApplet c) {
 		  for (int i = enemies.size() - 1; i >= 0; i--) {
 			    Enemy enemy = enemies.get(i);
@@ -24,11 +32,13 @@ public class Enemies {
 		  return c;
 	  }
 	  
-	   public Enemies updateEnemies(){
+	   public Enemies updateEnemies(Bullets b){
+		   this.removeDead();
+		   
 		  if(counter % 3 == 0) {
 	    	  for (int i = 0; i < enemies.size(); i++) {
 	  		    Enemy enemy = enemies.get(i);
-	  		    enemy.updateEnemy();
+	  		    enemy.updateEnemy(b);
 	  		  }
 		   }
 		   counter++;

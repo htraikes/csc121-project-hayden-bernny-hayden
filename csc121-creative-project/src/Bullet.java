@@ -19,10 +19,11 @@ public class Bullet {
 	    this.x = x;
 	    this.y = y;
 	    
-	    setbTop(x);
-	    setbBottom(y + 10);
-	    setbRight(x + 10);
-	    setbLeft(x);
+	    setbTop(y-1);
+	    setbBottom(y + 1);
+	    setbRight(x + 1);
+	    setbLeft(x-1);
+
 	  }
 	  
 
@@ -51,7 +52,10 @@ public class Bullet {
 	  public Bullet update() {
 		  
 		  if (this.y < 400){
-			  return new Bullet(this.x, y-=speed);
+			  this.y = y-=speed;
+			   setbTop(y-1);
+			   setbBottom(y + 1);
+			  return this;
 		  } else {
 			  return this;
 		  }

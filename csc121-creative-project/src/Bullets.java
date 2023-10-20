@@ -33,8 +33,10 @@ public class Bullets {
     public Bullets updateBullets(){
     	
 	    	  for (int i = bullets.size() - 1; i >= 0; i--) {
-	  		    Bullet bullet = bullets.get(i);
-	  		    bullet.update();
+	  		    Bullet curBullet = bullets.get(i);
+	  		    
+	  		    Bullet newBullet = curBullet.update();
+	  		    curBullet = newBullet;
 	  		  }
     	  return this;
       }
@@ -53,4 +55,10 @@ public class Bullets {
     	
     	return this;
     }
+    
+	public ArrayList<Bullet> giveBullets() {
+		return this.bullets;
+	}
 }
+
+

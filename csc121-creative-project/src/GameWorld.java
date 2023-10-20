@@ -36,7 +36,7 @@ public class GameWorld{
      * left or right and the bullets flying up the screen
      */
     public GameWorld update() {
-    	enemies.updateEnemies();
+    	enemies.updateEnemies(bullets);
     	p.updatePlayer();
     	bullets.updateBullets();
     	return this;
