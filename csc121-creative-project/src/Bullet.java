@@ -1,13 +1,14 @@
 import processing.core.PApplet;
+import processing.core.PImage;
 
 /*
  * Represent a single bullet with x & y position and constant speed
  */
-public class Bullet {
+public class Bullet extends PApplet{
 	  private float x;
 	  private float y;
 	  private float speed = 5; // Bullet speed
-	  
+	  PImage img;
 	  private float bTop;
 	  private float bBottom;
 	  private float bRight;
@@ -15,15 +16,15 @@ public class Bullet {
 	  
 	  
 	  
-	  Bullet(float x, float y) {
+	  Bullet(float x, float y, PImage img) {
 	    this.x = x;
 	    this.y = y;
-	    
+	    this.img = img;
 	    setbTop(y-1);
 	    setbBottom(y + 1);
 	    setbRight(x + 1);
 	    setbLeft(x-1);
-
+	   
 	  }
 	  
 
@@ -33,8 +34,12 @@ public class Bullet {
 	  public PApplet draw(PApplet c) {
 	    c.fill(255, 0, 0); // Red color for bullets
 	    c.noStroke();
-	    c.ellipse(x, y, 10, 10); // Adjust the size and shape as needed
+	    c.imageMode(CORNER);
+	    c.image(img ,x , y , 10, 10);
 	    return c;
+	    
+	    
+	    
 	  }
 	  
 	  /*

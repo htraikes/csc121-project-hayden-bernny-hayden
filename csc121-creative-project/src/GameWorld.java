@@ -9,26 +9,32 @@ public class GameWorld{
     Player p;
     Bullets bullets; 
     Enemies enemies;
+    PImage enemyImg;
     
     /**
      * Creates a game world given a Player object and Bullets object
      */
-    public GameWorld(Player p , Bullets bullets) {
+    public GameWorld(Player p , Bullets bullets, PImage enemyImg, PImage explosion) {
         this.p = p;
         this.bullets = bullets;
-        enemies = new Enemies();
+        enemies = new Enemies(enemyImg, explosion);
     }
     
     /**
      * Renders a picture of the Player and Bullets
      */
     public PApplet draw(PApplet c) {
-    	c.background(255);
+    	enemies.removeDead();
+    	c.background(0);
     	p.draw(c);
     	bullets.draw(c);
     	enemies.draw(c);
     	
         return c;
+    }
+    
+    public boolean gameOver() {
+    	return enemies.gameOver();
     }
     
     /**

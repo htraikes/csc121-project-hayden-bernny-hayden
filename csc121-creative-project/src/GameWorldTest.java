@@ -5,21 +5,21 @@ import processing.event.KeyEvent;
 class GameWorldTest {
 	
 	//creates a player for the test class
-	Player pOne = new Player(200);
+	Player pOne = new Player(200, null);
 	
 	//creates a Bullets object for the test class
-	Bullets bOne = new Bullets();
+	Bullets bOne = new Bullets(null);
 	
 	//creates a singular bullet for test class that would NOT hit a player
-	Bullet bTwo = new Bullet(0, 0);
+	Bullet bTwo = new Bullet(0, 0, null);
 	
 	//creates a singular bullet for test class that WOULD hit a player
-	Bullet bThree = new Bullet(200, 350);
+	Bullet bThree = new Bullet(200, 350,null);
 	
 
-	GameWorld gOne = new GameWorld(pOne, bOne);
+	GameWorld gOne = new GameWorld(pOne, bOne, null, null);
 	
-	Enemy eOne = new Enemy(200, 350);
+	Enemy eOne = new Enemy(200, 350, null, null);
 	
 	@Test
 	void gameWorldTest() {

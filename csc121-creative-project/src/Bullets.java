@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import processing.core.PApplet;
+import processing.core.PImage;
 import processing.event.KeyEvent;
 
 /*
@@ -7,9 +8,11 @@ import processing.event.KeyEvent;
  */
 public class Bullets {
 	private ArrayList<Bullet> bullets;
+	PImage img;
 	
-	public Bullets() {
+	public Bullets(PImage img) {
 		bullets = new ArrayList<>();
+		this.img = img;
 	}
 
 	/*
@@ -47,7 +50,7 @@ public class Bullets {
     public Bullets addBullets(Player p, KeyEvent key){
     	if (key.getKeyCode() == 32) {
     		
-    		Bullet newBullet = new Bullet(p.getPlayerX() + p.getPlayerWidth() / 2, p.getPlayerY());
+    		Bullet newBullet = new Bullet(p.getPlayerX() + p.getPlayerWidth() / 2, p.getPlayerY(), img);
     		bullets.add(newBullet);
     		
     		return this;

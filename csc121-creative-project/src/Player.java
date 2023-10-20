@@ -1,10 +1,11 @@
 import processing.core.PApplet;
+import processing.core.PImage;
 import processing.event.KeyEvent;
 
 /**
  * Represents a player that can move
  */
-public class Player {
+public class Player extends PApplet{
 	  private boolean movingRight;
 	  private boolean movingLeft;
 	  private float playerX;
@@ -12,7 +13,7 @@ public class Player {
 	  private float playerXSpeed;
 	  private int playerWidth;
 	  private int playerHeight;
-	  
+	  private PImage img;  // Declare PImage variable
 	  private float pTop;
 	  private float pBottom;
 	  private float pRight;
@@ -22,13 +23,13 @@ public class Player {
 	  
 	  
 	  
-	  Player(float playerX){
-		   this.setPlayerX(playerX);
-		   this.setPlayerY(350);
-		   this.playerXSpeed = 7;
+	  Player(float playerX, PImage img){
+		   this.playerX = playerX;
+		   this.playerY = 350;
+		   this.playerXSpeed = 3;
 		   this.playerHeight = 25;
-		   this.setPlayerWidth(25);
-		   
+		   this.playerWidth = 25;
+		   this.img = img;
 		   pLeft = (float) (playerX - (playerWidth));
 		   pRight = (float) (playerX + (playerWidth));
 		   pTop = (float) (playerY - (playerHeight));
@@ -37,14 +38,16 @@ public class Player {
 		   this.dead = false;
 		  
 	  }
-	  	
+	  
 	  
 	  /**
 	   * Draw rectangle at players current position
 	   */
 	  public PApplet draw(PApplet c) {
+		this.setup();
 	    c.fill(0, 0, 255);
-	    c.rect(this.getPlayerX(), getPlayerY(), getPlayerWidth(), playerHeight);
+	    c.imageMode(CORNER);
+	    c.image(img,playerX , playerY , playerWidth, playerHeight);
 	    return c;
 	  }
 	  
