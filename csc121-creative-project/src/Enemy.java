@@ -93,4 +93,11 @@ public class Enemy extends PApplet {
     public boolean gameOver() {
         return enemyY > 350;
     }
+    
+    /*
+     * Returns enemyX
+     */
+    public float getEnemyY() {
+    	return enemyY;
+    }
 }

@@ -62,7 +62,13 @@ public class Enemies {
         return enemies.size() == 0 || enemies.get(0).gameOver();
     }
     
+    // returns the score
     public int getScore() {
     	return this.score;
+    }
+    
+    // returns the enemies
+    public ArrayList<Enemy> getEnemies() {
+    	return enemies;
     }
 }
