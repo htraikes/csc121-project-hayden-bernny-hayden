@@ -46,6 +46,7 @@ public class GameWorld {
      */
     public boolean gameOver() {
         return enemies.gameOver();
+        
     }
 
     /**

@@ -22,10 +22,10 @@ public class GameApp extends PApplet {
 
     public void setup() {
         // Load images for player, bullets, enemies, and explosions
-        playerImg = loadImage("/images/Player.png");
-        bulletImg = loadImage("/images/Bullet.png");
-        enemyImg = loadImage("/images/Enemy.png");
-        explosion = loadImage("/images/Explosion.png");
+        playerImg = loadImage("images/Player.png");
+        bulletImg = loadImage("images/Bullet.png");
+        enemyImg = loadImage("images/Enemy.png");
+        explosion = loadImage("images/Explosion.png");
         playerImg.mask(playerImg); // Apply mask to the player image
          
 
@@ -41,6 +41,7 @@ public class GameApp extends PApplet {
             fill(TEXT_COLOR);
             fill(TEXT_COLOR);
             text("GAME OVER", width / 2, height / 2);
+            
         } else {
             gw = gw.update();
             gw.draw(this);
