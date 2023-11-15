@@ -2,23 +2,34 @@ import java.io.*;
 import java.util.*;
 import processing.core.*;
 
-public class Leaderboard extends Enemies{
-	public static Dictionary<String, Integer> records = new Hashtable<>();
-	public ArrayList<Integer> scores;
+public class Leaderboard {
+	 static Dictionary<Integer, String> records = new Hashtable<>();
+	 ArrayList<Enumeration<Integer>> scores;
+	 Enemies e;
 	
 	
-	Leaderboard(Dictionary<String, Integer> records, ArrayList<Integer> scores){
+	Leaderboard(Dictionary<Integer, String> records, ArrayList<Enumeration<Integer>> scores, Enemies e){
 		Leaderboard.records = records;
 		this.scores = scores;
-		super(enemyImg, explosion);
+		this.e = e;
 	}
 	
 	public PApplet draw(PApplet p) {
+		
+		
+		
+		
+		
 		//place items into scores Arraylist, sort it, then draw it
 		for (int i = 0; i < records.size(); i++) {
-			scores.add(records.get(i));
+			Enumeration<Integer> e = records.keys();
+			
+			scores.add(e);
 		}
 		Collections.sort(scores);
+		//
+		
+		
 		return p;
 	}
 	
@@ -28,8 +39,8 @@ public class Leaderboard extends Enemies{
 		//scanner for getting name
 		Scanner kb = new Scanner(System.in);
 		String name = kb.nextLine();
-		int score = getScore();
-		records.put(name, score);
+		int score = e.getScore();
+		records.put(score, name);
 		
 		//print out record to leaderboard.txt
 		PrintWriter pw = null;
