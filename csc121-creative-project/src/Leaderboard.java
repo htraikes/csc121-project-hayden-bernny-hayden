@@ -40,8 +40,12 @@ public class Leaderboard extends Enemies{
 			e.printStackTrace();
 		}
 		pw.println(score + " " + name);
+		
+		kb.close();
 			
 		return this;
 		//open output file
+		
+	
 	}
 }
