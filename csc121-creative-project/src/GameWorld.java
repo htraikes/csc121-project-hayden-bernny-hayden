@@ -1,3 +1,4 @@
+import java.io.*;
 import processing.core.*;
 import processing.event.KeyEvent;
 
@@ -12,6 +13,8 @@ public class GameWorld {
     
     private static final int TEXT_SIZE_World = 20;
     private static final int TEXT_COLOR_World = 255;
+    String leaderboardFile = Enemies.getLeaderboardFile();
+    private boolean gameOverPrinted = false;
 
     /**
      * Creates a game world given a Player object, a Bullets object, and enemy images
@@ -45,8 +48,14 @@ public class GameWorld {
      * Checks if the game is over
      */
     public boolean gameOver() {
-        return enemies.gameOver();
+        boolean isGameOver = enemies.gameOver();
         
+        if (isGameOver && !gameOverPrinted) {
+        	GameLeaderboard.displayLeaderboard();
+        	gameOverPrinted = true;
+        }
+        
+        return isGameOver;
     }
 
     /**
@@ -56,7 +65,17 @@ public class GameWorld {
         enemies.updateEnemies(bullets);
         p.updatePlayer();
         bullets.updateBullets();
+        updateLeaderboard();
         return this;
+    }
+    
+    private void updateLeaderboard() {
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(leaderboardFile))) {
+            Score scoreEntry = new Score("Player", enemies.getScore());
+            outputStream.writeObject(scoreEntry);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

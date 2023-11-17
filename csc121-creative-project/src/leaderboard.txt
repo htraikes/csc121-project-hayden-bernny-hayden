@@ -1,4 +1,1 @@
-Leaderboard:
-
-Name						Score
--------------------------------------
+leader

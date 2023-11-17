@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.ArrayList;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -11,6 +12,7 @@ public class Enemies {
     private int score;
 
     private static final int ENEMY_CREATION_INCREMENT = 20; // Periodically remove dead enemies after this count
+    private static final String LEADERBOARD_FILE = "leaderboard.txt";
 
     public Enemies(PImage enemyImg, PImage explosion) {
         enemies = new ArrayList<>();
@@ -28,7 +30,7 @@ public class Enemies {
             for (int i = enemies.size() - 1; i >= 0; i--) {
                 if (enemies.get(i).isDead()) {
                     enemies.remove(i);
-                    score+=15;
+                    updateScore(15);
                 }
             }
         }
@@ -56,6 +58,22 @@ public class Enemies {
         }
         return this;
     }
+    
+    private void updateScore(int points) {
+        score += points;
+
+        // Update leaderboard
+        updateLeaderboard();
+    }
+
+    private void updateLeaderboard() {
+        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(LEADERBOARD_FILE))) {
+            Score scoreEntry = new Score("Player", score);
+            outputStream.writeObject(scoreEntry);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }    
 
     // Checks if the game is over
     public boolean gameOver() {
@@ -70,5 +88,10 @@ public class Enemies {
     // returns the enemies
     public ArrayList<Enemy> getEnemies() {
     	return enemies;
+    }
+    
+    // returns the leaderboard file
+    public static String getLeaderboardFile() {
+    	return LEADERBOARD_FILE;
     }
 }
