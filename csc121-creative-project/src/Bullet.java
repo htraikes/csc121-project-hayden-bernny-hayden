@@ -110,32 +110,4 @@ public class Bullet {
     public void setbBottom(float bBottom) {
         this.bBottom = bBottom;
     }
-    
-    /*
-     * Returns the x position
-     */
-    public float getX() {
-    	return x;
-    }
-    
-    /*
-     * Returns the y position
-     */
-    public float getY() {
-    	return y;
-    }
-    
-    /*
-     * Returns the bullet speed
-     */
-    public static float getSpeed() {
-    	return SPEED;
-    }
-    
-    /*
-     * Returns the bullet hitbox
-     */
-    public static float getHitbox() {
-    	return BULLET_HITBOX_OFFSET;
-    }
 }
