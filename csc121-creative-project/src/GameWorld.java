@@ -10,37 +10,59 @@ public class GameWorld {
     private Player p;
     private Bullets bullets;
     private Enemies enemies;
-    
+    private LeaderBoard lb;
     private static final int TEXT_SIZE_World = 20;
     private static final int TEXT_COLOR_World = 255;
-    String leaderboardFile = Enemies.getLeaderboardFile();
-    private boolean gameOverPrinted = false;
+    private static final int PLAYER_START_POSITION = 200;
+    private PImage playerImg;
+    private PImage bulletImg;
+    private PImage enemyImg;
+    private PImage explosion;
+    
+    boolean gameOver;
+    
+    
 
     /**
      * Creates a game world given a Player object, a Bullets object, and enemy images
      */
-    public GameWorld(Player p, Bullets bullets, PImage enemyImg, PImage explosion) {
-        this.p = p;
-        this.bullets = bullets;
+    public GameWorld(PImage playerImg, PImage bulletImg, PImage enemyImg, PImage explosion) {
+        p = new Player(PLAYER_START_POSITION, playerImg);
+        bullets = new Bullets(bulletImg);
         enemies = new Enemies(enemyImg, explosion);
+        lb = new LeaderBoard();
+        gameOver = gameOver();
+        this.playerImg = playerImg;
+        this.bulletImg = bulletImg;
+        this.enemyImg = enemyImg;
+        this.explosion = explosion;
+        
     }
 
     /**
      * Renders a picture of the Player and Bullets on the canvas
      */
     public PApplet draw(PApplet c) {
-        enemies.removeDead();
-        c.background(0);
-        p.draw(c);
-        bullets.draw(c);
-        enemies.draw(c);
-        c.textAlign(PConstants.TOP, PConstants.RIGHT); // Set the text alignment to center
-        c.textSize(TEXT_SIZE_World);
-        c.fill(TEXT_COLOR_World);
-        String score = this.getScore();
-        c.text(("SCORE: " + score), c.width - 90, 40);
-        
-
+    	if(gameOver()) {
+    		lb.setScore(enemies.getScore()+"");
+            lb.draw(c); 
+            lb.setBeenThrough();
+            
+            if (lb.getRestart()) {
+            	restart();
+            }
+    	} else {
+            enemies.removeDead();
+            c.background(0);
+            p.draw(c);
+            bullets.draw(c);
+            enemies.draw(c);
+            c.textAlign(PConstants.TOP, PConstants.RIGHT); // Set the text alignment to center
+            c.textSize(TEXT_SIZE_World);
+            c.fill(TEXT_COLOR_World);
+            String score = enemies.getScore() + "";
+            c.text(("SCORE: " + score), c.width - 90, 40);
+    	}
         return c;
     }
 
@@ -50,12 +72,11 @@ public class GameWorld {
     public boolean gameOver() {
         boolean isGameOver = enemies.gameOver();
         
-        if (isGameOver && !gameOverPrinted) {
-        	GameLeaderboard.displayLeaderboard();
-        	gameOverPrinted = true;
-        }
-        
         return isGameOver;
+    }
+    
+    public String getScore() {
+    	return enemies.getScore() + "";
     }
 
     /**
@@ -65,18 +86,11 @@ public class GameWorld {
         enemies.updateEnemies(bullets);
         p.updatePlayer();
         bullets.updateBullets();
-        updateLeaderboard();
+        
+        
         return this;
     }
-    
-    private void updateLeaderboard() {
-        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(leaderboardFile))) {
-            Score scoreEntry = new Score("Player", enemies.getScore());
-            outputStream.writeObject(scoreEntry);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
 
     /**
      * Produces an updated world where the player moves and adds bullets to the Bullets class
@@ -84,6 +98,7 @@ public class GameWorld {
     public GameWorld keyPressed(KeyEvent key) {
         p = p.keyPress(key);
         bullets.addBullets(p, key);
+        lb.keyPress(key);
         return this;
     }
 
@@ -95,9 +110,16 @@ public class GameWorld {
         return this;
     }
     
-    public String getScore() {
-    	return enemies.getScore() +"";
+    public GameWorld restart() {
+        p = new Player(PLAYER_START_POSITION, playerImg);
+        bullets = new Bullets(bulletImg);
+        enemies = new Enemies(enemyImg, explosion);
+        lb = new LeaderBoard();
+        return this;
     }
+    
+    
+    
 }
 
 

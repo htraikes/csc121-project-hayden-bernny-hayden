@@ -62,36 +62,26 @@ public class Enemies {
     private void updateScore(int points) {
         score += points;
 
-        // Update leaderboard
-        updateLeaderboard();
+       
     }
 
-    private void updateLeaderboard() {
-        try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(LEADERBOARD_FILE))) {
-            Score scoreEntry = new Score("Player", score);
-            outputStream.writeObject(scoreEntry);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }    
+ 
 
     // Checks if the game is over
     public boolean gameOver() {
         return enemies.size() == 0 || enemies.get(0).gameOver();
     }
     
-    // returns the score
     public int getScore() {
     	return this.score;
     }
+
     
     // returns the enemies
     public ArrayList<Enemy> getEnemies() {
     	return enemies;
     }
     
-    // returns the leaderboard file
-    public static String getLeaderboardFile() {
-    	return LEADERBOARD_FILE;
-    }
+
+
 }
