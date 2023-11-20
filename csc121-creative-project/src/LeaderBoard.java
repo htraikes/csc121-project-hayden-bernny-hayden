@@ -179,7 +179,7 @@ public class LeaderBoard {
                 writer.println(score);
             }
 
-            System.out.println("Scores updated");
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
